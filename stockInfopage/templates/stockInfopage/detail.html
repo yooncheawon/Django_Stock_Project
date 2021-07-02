@@ -1,0 +1,373 @@
+<!-- 기업 목록 리스트. dashboard 카피 -->
+{% load static %}
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+ <html lang="en"> <!-- <html lang="en" style="height: 100%"> -->
+  
+  <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"> <title>주식 정보</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+      
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>주식 상세 정보</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <!-- 해당 부분이 빠지면 페이징 동작 안함-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#7952b3">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      
+      #name1{
+        font-size : 35px;
+      }
+      #name2{
+        font-size : 35px;
+      }
+      #name3{
+        text-anchor: middle;
+        font-size : 33px;
+      }
+          table.type08 {
+              border-collapse: collapse;
+              text-align: left;
+              line-height: 1.5;
+              border-left: 1px solid #ccc;
+              margin: auto;
+              text-align : center;
+            }
+
+            table.type08 thead th {
+              padding: 10px;
+              font-weight: bold;
+              border-top: 1px solid #ccc;
+              border-right: 1px solid #ccc;
+              border-bottom: 2px solid #c00;
+              background: #dcdcd1;
+            }
+            table.type08 tbody th {
+              width: 150px;
+              padding: 10px;
+              font-weight: bold;
+              vertical-align: top;
+              border-right: 1px solid #ccc;
+              border-bottom: 1px solid #ccc;
+              background: #ececec;
+            }
+            table.type08 td {
+              text-align : center;
+              width: 1000px;
+              padding: 10px;
+              border-right: 1px solid #ccc;
+              border-bottom: 1px solid #ccc;
+            }
+            #tx1{
+              font-size:25px;
+            }
+            div{
+              margin : auto;
+            }
+            #find{
+              text-align:left;
+              margin-left:34%;
+              
+            }
+
+            table.type03 {
+              border-collapse: collapse;
+              text-align: left;
+              line-height: 1.5;
+              border-top: 1px solid #ccc;
+              border-left: 3px solid #369;
+              margin : 20px 10px;
+            }
+            table.type03 th {
+              width: 147px;
+              padding: 10px;
+              font-weight: bold;
+              vertical-align: top;
+              color: #153d73;
+              border-right: 1px solid #ccc;
+              border-bottom: 1px solid #ccc;
+
+            }
+            table.type03 td {
+              width: 349px;
+              padding: 10px;
+              vertical-align: top;
+              border-right: 1px solid #ccc;
+              border-bottom: 1px solid #ccc;
+            }
+
+
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+  <style type="text/css">
+  /* Chart.js */
+    @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">주식정보사이트</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">대시보드
+            <span class="visually-hidden"></span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/daily_price">일일 가격 정보</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/company">상장 기업 목록</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/search">뉴스</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="container my-5" >
+      <div class="row" margin:10px;>
+        
+        
+
+          
+
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" >
+            <a class="align-items-center" id="name2">{{comp_list4.company}}</a><a id="name1" >최근 거래량</a>
+            <h7> 측정 기간 : 일주일</h7>
+          </div>
+            <div class="container"> <canvas id="myChart"></canvas></div> 
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <!-- 차트 -->
+              <script> var ctx = document.getElementById('myChart');
+              
+              var myChart = new Chart(ctx, { type: 'line', data: { labels: ['{{comp_list7.date}}','{{comp_list6.date}}','{{comp_list5.date}}','{{comp_list4.date}}'], datasets: [{ label: '', data: ['{{comp_list7.high}}', '{{comp_list6.high}}', '{{comp_list5.high}}', '{{comp_list4.high}}', 3],
+                backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ], borderColor: [ 'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ], borderWidth: 1 }] }, 
+                options: 
+                { scales: { 
+                  yAxes: [{ ticks: { min: 0 ,stepSize :100000,fontSize:14,
+                    userCallback: function (value){
+                      value = value.toString();
+                      value = value.split(/(?=(?:...)*$)/);
+                      value = value.join(',');
+                      return value+"원";
+                    }
+                  } }] } } }); </script>
+            
+          
+          
+          <div>
+          
+          </div>
+
+          <div>
+                  <table class="type08">
+                    <thead>
+                    <tr>
+                      
+                      <th scope="cols" colspan="6" id="tx1" >오늘 날짜  :   {{comp_list4.date}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <th scope="row">개장가</th>
+                      <td>{{comp_list4.open}}원</td>
+                      <th scope="row">상한가</th>
+                      <td>{{comp_list4.high}}원</td>
+                      <th scope="row">하한가</th>
+                      <td>{{comp_list4.low}}원</td>
+                    </tr>
+                    <tr>
+                      
+                      <th scope="row">마감가</th>
+                      <td>{{comp_list4.close}}원</td>
+                      <th scope="row">전일비</th>
+                      <td>{{comp_list4.diff}}원</td>
+                      <th scope="row">거래량</th>
+                      <td>{{comp_list4.volume}}회</td>
+                    </tr>
+                    
+                    </tbody>
+                  </table>
+          </div>
+
+            
+        
+          
+            <!-- ------------------------------- [edit] -------------------------------- -->
+              <div class="row justify-content-end my-3" id = "find">
+                <div class="col-4 input-group">
+                  <input type="text" class="form-control kw3" value="{{ kw3|default_if_none:'' }}">
+                  <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                  </div>
+                </div>
+              </div>
+            <!-- ----------------------------------------------------------------------- -->
+            <div class="table-responsive">
+
+
+            
+            <table class="table table-striped table-sm" style="font-size:15px;">
+              <thead>
+                <tr>
+                    <td><B>티커</B></td>
+                    <td><B>기업명</B></td>
+                    <td><B>시간</B></td>
+                    <td><B>시가</B></td>
+                    <td><B>최고가</B></td>
+                    <td><B>최저가</B></td>
+                    <td><B>종가</B></td>
+                    <td><B>전일비</B></td>
+                    <td><B>거래량</B></td>
+                </tr>
+              </thead>
+              <tbody>
+                {% for dashboard in comp_list %}
+                <tr>
+                  <td>{{dashboard.code}}</td>
+                  <td>{{dashboard.company}}</td>
+                  <td>{{dashboard.date}}</td>
+                  <td>{{dashboard.open}} </td>
+                  <td>{{dashboard.high}}</td>
+                  <td>{{dashboard.low}}</td>
+                  <td>{{dashboard.close}}</td>
+                  <td>{{dashboard.diff}}</td>
+                  <td>{{dashboard.volume}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+            <!-- 페이징처리 시작 -->
+            <ul class="pagination justify-content-center">
+              <!-- 이전페이지 -->
+              {% if comp_list.has_previous %}
+              <li class="page-item">
+                <a class="page-link" data-page="{{ comp_list.previous_page_number }}" href="#">이전</a>
+              </li>
+              {% else %}
+              <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+              </li>
+              {% endif %}
+
+              <!-- 페이지리스트 -->
+              {% for page_number in comp_list.paginator.page_range %}
+              {% if page_number >= comp_list.number|add:-5 and page_number <= comp_list.number|add:5  %}
+                {% if page_number == comp_list.number %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" data-page="{{ page_number }}" herf="#">{{ page_number }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                <!-- edit -->
+                  <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+                </li>
+                {% endif %}
+              {% endif %}
+              {% endfor %}
+
+              <!-- 다음페이지 -->
+              {% if comp_list.has_next %}
+              <li class="page-item">
+              <!-- edit -->
+                <a class="page-link" data-page="{{ comp_list.next_page_number }}" href="#">다음</a>
+              </li>
+              {% else %}
+              <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+              </li>
+              {% endif %}
+            </ul>
+            <!-- 페이징처리 끝 -->
+            <!-- edit -->
+            <form id="searchForm" method="get" action="{% url 'stockInfopage:dashboard' %}">
+              <input type="hidden" id="kw3" name="kw3" value="{{ kw3|default_if_none:'' }}">
+              <input type="hidden" id="page" name="page" value="{{ page }}">
+            </form>
+            <!-- -->
+          </div>
+        </main>
+      </div>
+    
+
+      {% block script %}
+      <script type='text/javascript'>
+      $(document).ready(function(){
+          $(".page-link").on('click', function() {
+              $("#page").val($(this).data("page"));
+              $("#searchForm").submit();
+          });
+
+          $("#btn_search").on('click', function() {
+              $("#kw3").val($(".kw3").val());
+              $("#page").val(1);  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+              $("#searchForm").submit();
+          });
+      });
+      </script>
+      {% endblock %}
+
+      <!-- jQuery JS -->
+      <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+      <!-- Bootstrap JS -->
+      <script src="{% static 'bootstrap.min.js' %}"></script>
+
+
+
+      <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+    </div>
+
+</body>  
