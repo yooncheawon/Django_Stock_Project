@@ -101,7 +101,7 @@ DATABASES = {
         'NAME': 'STOCK_PROJECT',  #mysql
         'USER': 'root', #root
         'PASSWORD': 'test0000', # 비밀번호
-        'HOST': '', #공백으로 두면 default localhost
+        'HOST': '', #공백으로 두면 default localhost, 127.0.0.1
         'PORT': '3306' #공백으로 두면 default 3306
     }
 }
