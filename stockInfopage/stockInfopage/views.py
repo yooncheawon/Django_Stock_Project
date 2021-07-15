@@ -263,7 +263,7 @@ def home(request):
     organ1 = list()
     total_organ = list()
 
-    for o in organ_name:
+    for o in organ_name[0:7]:
         organ1.append(o.text.strip())
 
     for o2 in range(len(organ1)):
