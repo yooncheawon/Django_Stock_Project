@@ -87,19 +87,18 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
 
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
         # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': '',  #mysql
+       
         # 'USER': '', #root
         # 'PASSWORD': '', #1234
-        # 'HOST': '', #공백으로 냅두면 default localhost
-        # 'PORT': '3306' #공백으로 냅두면 default 3306
+       
 
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'STOCK_PROJECT',  #mysql
-        'USER': 'root', #root
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'STOCK_PROJECT',  #mysql
+        'USER': 'ykk_stock',
         'PASSWORD': 'test0000', # 비밀번호
         'HOST': '', #공백으로 두면 default localhost
         'PORT': '3306' #공백으로 두면 default 3306
@@ -151,3 +150,10 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}

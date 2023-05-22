@@ -22,6 +22,9 @@ from stockInfopage import views as dashboard
 # from stockInfopage import views as lists
 from stockInfopage import views as detail
 
+from django.urls import path
+from stockInfopage.views import home
+
 #edit
 from stockInfopage import views as search
 urlpatterns = [
@@ -33,8 +36,9 @@ urlpatterns = [
     path('dashboard/', dashboard.dashboard),
     path('dashboard/<str:code>', detail.detail),
     path('search/', search.search),
+    path('', home, name='home'),
 
-    #edit
-    #path('lists/',lists.lists),
-    #path('lists/<str:code>',detail.detail),
 ]
+
+
+
