@@ -53,22 +53,19 @@
 
 
   <!-- Custom styles for this template -->
-  <link href="carousel.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/carousel.css' %}">
      <!-- Custom styles for this template -->
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
  
   <style>
     #main-div {
-      background-image: url('{{data.0.image}}');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: right;
+      background-color: #2D3E50;
       position: relative;
     }
   </style>
 </head>
 
-<body style="font-family: 'Nanum Gothic'">
+<body style="font-family: 'Nanum Gothic'; background-color: #DDDDDD;">
   <div class="container">
     <header class="carousel-header py-3">
       <div class="row flex-nowrap justify-content-between align-items-center">
@@ -92,7 +89,7 @@
     </header>
 
 
-    <div id="main-div" class="jumbotron p-10 p-md-5 text-white rounded bg-dark border-2">
+    <div id="main-div" class="jumbotron p-10 p-md-5 text-white rounded border-2">
       <div class="col-md-6 px-0">
         <p style="font-size: 15px"></p>
         <h2 class="text-light " style="color: black; font-family: NanumSquare"><b>{{data.0.title}}</b></h2>
@@ -105,7 +102,7 @@
 
 
 
-    <div class="row mb-2">
+    <div class="row mb-2 justify-content-between align-items-center">
       <!-- 대표 뉴스 -->
       <div class="col-md-6">
         <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -115,30 +112,32 @@
             <div class="mb-1 text-muted" style="font-size: 13px;">{% now "Y m. d" %}</div>
             <div class="mb-1 text-muted" style="font-size: 13px;">{{ fnews_data.0.fwriting }}</div>
             <p class="card-text mb-auto" style="font-size: 15px;">{{ fnews_data.0.fcontent }}</p>
-            <a href="#" class="stretched-link">뉴스 더보기</a>
+            <a href="{{ fnews_data.0.flink }}" class="stretched-link">뉴스 더보기</a>
           </div>
           <div class="col-auto d-none d-lg-block">
             <img src="{{ fnews_data.0.fimage }}" style="float: right; margin-top: 30px; margin-right: 15px; auto; width: 220px; height: 220px;">
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-success" style="font-size: 20px;">MAIN NEWS</strong>
-          <h3 class="mb-0" style="font-size: 17px;"><b>{{ data.1.title }}</b></h3>
-          <div class="mb-1 text-muted" style="font-size: 13px;">{% now "Y m. d" %}</div>
-          <div class="mb-1 text-muted" style="font-size: 13px;">{{ data.1.writing }}</div>
-          <p class="mb-auto" style="font-size: 15px;">{{ data.1.content }}</p>
-          <a href="{{ data.1.link }}" class="stretched-link">뉴스 더보기</a>
-        </div>
-        <div class="col-auto d-none d-lg-block">
-          <img src="{{ data.1.image }}" style="float: right; margin-top: 30px; margin-right: 15px; auto; width: 220px; height: 220px;">
+      <div class="col-md-6">
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-success" style="font-size: 20px;">MAIN NEWS</strong>
+            <h3 class="mb-0" style="font-size: 17px;"><b>{{ data.1.title }}</b></h3>
+            <div class="mb-1 text-muted" style="font-size: 13px;">{% now "Y m. d" %}</div>
+            <div class="mb-1 text-muted" style="font-size: 13px;">{{ data.1.writing }}</div>
+            <p class="mb-auto" style="font-size: 15px;">{{ data.1.content }}</p>
+            <a href="{{ data.1.link }}" class="stretched-link">뉴스 더보기</a>
+          </div>
+          <div class="col-auto d-none d-lg-block">
+            <img src="{{ data.1.image }}" style="float: right; margin-top: 30px; margin-right: 15px; auto; width: 220px; height: 220px;">
+          </div>
         </div>
       </div>
     </div>
+
+    
 
 <main role="main" class="container">
   <div class="row">

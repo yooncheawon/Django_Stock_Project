@@ -78,11 +78,11 @@ def home(request):
     soup = BeautifulSoup(response.text, 'html.parser')
 
     # 네이버 경제 메인
-    my_news = soup.select('#main_content > div.list_body.newsflash_body > ul.type06_headline > li > dl > dt:nth-child(2) ')
-    my_news_link = soup.select('#main_content > div.list_body.newsflash_body > ul.type06_headline > li > dl > dt:nth-child(2) > a')
-    my_news_content = soup.select('#main_content > div > div._persist > div:nth-child(1) > div.cluster_group._cluster_content > div.cluster_body > ul > li:nth-child(1) > div.cluster_text > div.cluster_text_lede')
-    my_news_writing = soup.select('#main_content > div > div._persist > div:nth-child(1) > div.cluster_group._cluster_content > div.cluster_body > ul > li:nth-child(1) > div.cluster_text > div.cluster_text_info > div')
-    my_news_image = soup.select('#main_content > div > div._persist > div:nth-child(1) > div.cluster_group._cluster_content > div.cluster_body > ul > li:nth-child(1) > div.cluster_thumb > div.cluster_thumb_inner > a > img')
+    my_news = soup.select('#main_content > div > div._persist > div.section_headline > ul > li > div.sh_text > a')
+    my_news_link = soup.select('#main_content > div > div._persist > div.section_headline > ul > li > div.sh_text > a')
+    my_news_content = soup.select('#main_content > div > div._persist > div.section_headline > ul > li > div.sh_text > div.sh_text_lede')
+    my_news_writing = soup.select('#main_content > div > div._persist > div.section_headline > ul > li > div.sh_text > div.sh_text_info > div')
+    my_news_image = soup.select('#main_content > div > div._persist > div.section_headline > ul > li > div.sh_thumb > div > a > img')
 
     #newslist = []
     newslist = list()
@@ -101,7 +101,6 @@ def home(request):
         link = my_news[i].get('href')
         content = my_news_content[i].text.strip()
         writing = my_news_writing[i].text.strip()
-        image = my_news_image[i].get('src').replace('nf132_90','w647')
 
         try: #list index out of range 방지를 위한 예외처리
             image_s = my_news_image[i].get('src')
