@@ -65,33 +65,35 @@
   </style>
 </head>
 
-<body style="font-family: 'Nanum Gothic'; background-color: #DDDDDD;">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair:wght@500&display=swap');
+  .text-center {
+    text-align: center;
+  }
+  .carousel-header-logo {
+    display: inline-block;
+    margin: 0 auto;
+  }
+</style>
+
+<body style="font-family: 'Playfair Display'; background-color: #DDDDDD;">
   <div class="container">
     <header class="carousel-header py-3">
       <div class="row flex-nowrap justify-content-between align-items-center">
-        <div class="col-4 pt-1">
-          <a class="carousel-header-logo text-dark" style="font-size:40px;" href="#">STOCK SITE</a>
+        <div class="col-40 pt-1">
+          <a class="carousel-header-logo text-dark text-center" style="font-size: 40px; width: 100%;" href="#">STOCK SITE</a>
         </div>
         <div class="col-4 text-center">
         </div>
 
-        <div class="col-4 d-flex justify-content-end align-items-center">
-          <a class="text-muted" href="#" aria-label="Search">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false">
-              <title>Search</title>
-              <circle cx="10.5" cy="10.5" r="7.5"></circle>
-              <path d="M21 21l-5.2-5.2"></path>
-            </svg>
-          </a>
-          <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
-        </div>
+      
       </div>
     </header>
 
 
     <div id="main-div" class="jumbotron p-10 p-md-5 text-white rounded border-2">
       <div class="col-md-6 px-0">
-        <p style="font-size: 15px"></p>
+        <p style="font-size: 35px"></p>
         <h2 class="text-light " style="color: black; font-family: NanumSquare"><b>{{data.0.title}}</b></h2>
         <p class="lead my-6">{{data.0.content}}</p>
         <p class="lead mb-0"><a href="{{data.0.link}}" class="text-white font-weight-bold">TODAY NEWS</a></p>
@@ -236,13 +238,13 @@
             </div>
           </div> 
         </div>
-      </div><!-- /.carousel-post -->
+      </div><!— /.carousel-post —>
 
-    </aside><!-- /.carousel-sidebar -->
+    </aside><!— /.carousel-sidebar —>
 
-  </div><!-- /.row -->
+  </div><!— /.row —>
 
-</main><!-- /.container -->
+</main><!— /.container —>
 
 <footer class="carousel-footer">
 <div class="col-15 text-center">
