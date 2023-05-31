@@ -30,12 +30,9 @@ from stockInfopage import views as search
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('company/', company.company),
-    path('daily_price/', daily_price.daily_price),
     path('daily_price/<str:code>', detail.detail),#edit daily_price에서 티커명 클릭 시 세부 페이지로 이동
     path('',include('stockInfopage.urls')), # 페이징 시 URL이 해당 경로를 따라가도록 설정. stockInfopage의 urls.py 내용을 불러온다.
-    path('dashboard/', dashboard.dashboard),
     path('dashboard/<str:code>', detail.detail),
-    path('search/', search.search),
     path('', home, name='home'),
 
 ]

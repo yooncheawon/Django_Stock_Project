@@ -47,23 +47,6 @@ def company(request):
 
     
 
-def daily_price(request):
-    info = Daily.objects.all()
-    page = request.GET.get('page', '1')  # 페이지
-    kw2 = request.GET.get('kw2', '')  # 검색어
-    #조회
-    daily_price= info.order_by('code')
-    if kw2:
-        daily_price = daily_price.filter(
-            Q(code__icontains=kw2) |  # 제목검색
-            Q(company__icontains=kw2)    # 내용검색
-        ).distinct()
-
-    paginator = Paginator(daily_price, 20)
-    page_obj = paginator.get_page(page)
-    context = {'info':page_obj, 'page':page, 'kw2':kw2}
-    return render(request, 'stockInfopage/daily_price.html',context)
-
 
 
 
@@ -138,9 +121,6 @@ def home(request):
 
     financenewslist = []
 
-
-    # for link in my_news_link:
-    #     nlink.append(link.get('href'))
         
     for n in range(len(finance_news)):
    
@@ -161,8 +141,6 @@ def home(request):
         financenewslist.append(item_obj)
     
     fnews_data = financenewslist
-    # 네이버 경제 금융 마지막.
-
 
 
 
@@ -172,8 +150,6 @@ def home(request):
     urls = 'https://finance.naver.com/'
     headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36"}
     res = requests.get(urls,headers=headers)
-    #res = req.urlopen(urls).read().decode('cp949')
-    #soups = BeautifulSoup(res,'html.parser')
     soups = BeautifulSoup(res.text,'html.parser')
 
     top = soups.select("#container > div.aside > div.group_aside > div.aside_area.aside_popular > table > tbody > tr > th")
@@ -197,8 +173,8 @@ def home(request):
 
     
     #상한가 테스트
-    url = "http://finance.naver.com/sise/"          #네이버 금융 url 주소
-    res = req.urlopen(url).read().decode('cp949')   #utf-8 : 한글 깨짐, unicode_escape : 한글 깨짐, cp949로 변환해야한다.
+    url = "http://finance.naver.com/sise/"         
+    res = req.urlopen(url).read().decode('cp949')   
     soup = BeautifulSoup(res, "html.parser")
  
     top101 = soup.select("#popularItemList > li > a")
@@ -261,7 +237,7 @@ def home(request):
     sise_data = sise2
 
     #기관 순매수
-    url = 'https://finance.naver.com/sise/sise_deal_rank.nhn'         #네이버 금융 url 주소
+    url = 'https://finance.naver.com/sise/sise_deal_rank.nhn'       
     headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36"}
     response = requests.get(url,headers=headers)
     soup = BeautifulSoup(response.text,'html.parser')
@@ -290,53 +266,8 @@ def home(request):
     return render(request, 'stockInfopage/home.html',context)
 
 
-def dashboard(request):
-    comp_list = Daily.objects.all()
-    page = request.GET.get('page', '1')
-    kw3 = request.GET.get('kw3','')
-    #조회
-    comp_list2=comp_list.order_by('code')
-    if kw3:
-        comp_list2 = comp_list2.filter(
-            Q(code__icontains=kw3) |  # 제목검색
-            Q(company__icontains=kw3)    # 내용검색
-        ).distinct()
-    
-    paginator = Paginator(comp_list2, 20)
-    page_obj = paginator.get_page(page)
-    context = {'comp_list':page_obj,'page':page, 'kw3':kw3}
-    return render(request, 'stockInfopage/dashboard.html',context)
 
-    
-
-#네이버 뉴스 검색
-def search(request):
-    if request.method == 'GET':
-        
-        config_secret_debug = json.loads(open(settings.SECRET_DEBUG_FILE).read())
-        client_id = config_secret_debug['NAVER']['CLIENT_ID']
-        client_secret = config_secret_debug['NAVER']['CLIENT_SECRET']
-
-        q = request.GET.get('q')
-        encText = urllib.parse.quote("주가".format(q))
-        url = "https://openapi.naver.com/v1/search/news?query=" + encText  # json 결과
-        news_api_request = urllib.request.Request(url)
-        news_api_request.add_header("X-Naver-Client-Id",client_id)
-        news_api_request.add_header("X-Naver-Client-Secret",client_secret)
-        response = urllib.request.urlopen(news_api_request)
-        rescode = response.getcode()
-        if (rescode == 200):
-            response_body = response.read()
-            result = json.loads(response_body.decode('utf-8'))
-            items = result.get('items')
-
-            context = {
-                'items': items
-            }
-            return render(request, 'stockInfopage/search.html', context=context)
-
-
-
+#날짜 관련
 def detail(request,code):
     comp_lists = Company.objects.get(code=code)
     
@@ -358,21 +289,3 @@ def detail(request,code):
     comp_list6 = Daily.objects.get(date= datenow3,code=code)
     comp_list7 = Daily.objects.get(date= datenow4,code=code)
 
-
-
-    
-    page = request.GET.get('page', '1')
-    kw3 = request.GET.get('kw3','')
-    #조회
-    comp_list2=comp_list.order_by('code')
-    if kw3:
-        comp_list2 = comp_list2.filter(
-            Q(code__icontains=kw3) |  # 제목검색
-            Q(company__icontains=kw3)    # 내용검색
-        ).distinct()
-    
-    paginator = Paginator(comp_list2, 20)
-    page_obj = paginator.get_page(page)
-
-    context = {'comp_list':page_obj,'page':page, 'kw3':kw3,'comp_lists':comp_lists,'comp_list4':comp_list4,'comp_list5':comp_list5,'comp_list6':comp_list6,'comp_list7':comp_list7}
-    return render(request, 'stockInfopage/detail.html', context)#다른곳 이동 
