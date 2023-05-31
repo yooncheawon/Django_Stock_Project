@@ -3,8 +3,6 @@ from django.core import paginator
 from django.core.paginator import Paginator
 from django.db.models.expressions import OuterRef
 from django.shortcuts import get_object_or_404, render
-from .models import Company, Detaildaily
-from .models import Daily
 from django.db.models import Q
 
 #crawling
