@@ -19,18 +19,8 @@ from selenium.webdriver.chrome.options import Options
 import pandas as pd
 import numpy as np
 
-## 크롬 경로설정 
 
-browser = webdriver.Chrome("C:/chromedriver_win32/chromedriver.exe") 
-#browser.implicitly_wait(3) 
-page_num = 1 
-board_index = 1 
-start_date = "2017-01-05" 
-end_date = "2021-01-05" 
-base_url = "http://consensus.hankyung.com" 
-browser.get("http://consensus.hankyung.com/apps.analysis/analysis.list?sdate="+str(start_date)+"&edate="+str(end_date)+"&now_page="+str(page_num)+"&search_value=&report_type=&pagenum=80&search_text=&business_code=") 
-
-##pdf 파일 파싱하기
+##pdf 파일 파싱
 def read_pdf_file(pdfFile):
     rsrcmgr = PDFResourceManager() 
     retstr = StringIO() 
@@ -46,11 +36,9 @@ def read_pdf_file(pdfFile):
 
 ##web pdf타입 사이트 pdf 파일을 다운받기 
 def download_pdf(lnk):
-    download_dir = "/Users/mjc/Desktop/stockCrawling"
-    # for linux/*nix, download_dir="/usr/Public" 
+    download_dir = "/Users/serin/Desktop/stockCrawling"
     options = webdriver.ChromeOptions()
-    #options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    #driver = webdriver.Chrome(options=options, executable_path='C:/chromedriver_win32/chromedriver.exe')
+ 
 
     profile = {"plugins.plugins_list": [{"enabled": False, "name": "Chrome PDF Viewer"}], # Disable Chrome's PDF Viewer 
     "download.default_directory": download_dir, 
@@ -69,11 +57,6 @@ def download_pdf(lnk):
     pdf_content = read_pdf_file(pdf_file) 
     return pdf_content
 
-##로컬 파일 불러오기 
-#pdf_file_test = open("547325.pdf", "rb") 
-#contents = read_pdf_file(pdf_file_test) 
-##해당 pdf 파일 다운로드 
-#download_pdf("http://consensus.hankyung.com/apps.analysis/analysis.downpdf?report_idx=547354")
  
 board_category = "" 
 board_title = "" 
