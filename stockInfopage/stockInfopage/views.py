@@ -23,23 +23,6 @@ from dateutil.relativedelta import relativedelta
 from django.utils.dateformat import DateFormat
 
 
-def company(request):
-    comp = Company.objects.all()
-    page = request.GET.get('page', '1')  # 페이지
-    kw = request.GET.get('kw','') # 검색어
-    #조회
-    company_list = comp.order_by('code')
-    if kw:
-        company_list = company_list.filter(
-            Q(code__icontains=kw) |
-            Q(company__icontains=kw)
-        ).distinct()
-
-    #페이징처리
-    paginator = Paginator(company_list, 20)
-    page_obj = paginator.get_page(page)
-    context = {'comp':page_obj, 'page':page, 'kw' : kw}
-    return render(request, 'stockInfoPage/company.html', context)
 
 
 
