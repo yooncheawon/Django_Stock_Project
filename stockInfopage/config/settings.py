@@ -11,11 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #add
 ROOT_DIR = os.path.dirname(BASE_DIR)
 SECRET_DEBUG_FILE = os.path.join(ROOT_DIR, '.config_secret/settings_debug.json')
-
-
 SECRET_KEY = 'django-insecure-1zn+60rw&j(=)mi#3=1$5av8*(62qq840s^+ay$*6obi455%%k'
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -64,9 +61,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 
-
-
-
 DATABASES = {
 
     'default': {
@@ -108,19 +102,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
-
 LANGUAGE_CODE = 'ko-kr'
-
 TIME_ZONE = 'Asia/Seoul'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
-
 
 STATIC_URL = '/static/'
 

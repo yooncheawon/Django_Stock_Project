@@ -99,8 +99,6 @@
     </div>
 
 
-
-
     <div class="row mb-2 justify-content-between align-items-center">
       <!-- 대표 뉴스 -->
       <div class="col-md-6">
@@ -167,17 +165,13 @@
       </ul>
 
     </div><!-- /.carousel-main -->
-
     <aside class="col-md-4 carousel-sidebar">
       <div class="p-4 mb-3 bg-light rounded">
         <h4 class="font-bold" style="font-family:NanumSquare"><b>주요 거래 top5</b></h4>
-      
-        <!-- edit. 리스트 두개를 한번에 받아서 출력 -->
+ 
         {%for home in comps %}
         <td>
-          
-          <p style="font-size:15px;"><b>{{home.comp}}</b></p>
-          
+          <p style="font-size:15px;"><b>{{home.comp}}</b></p>   
         </td>
         {%endfor%}
         <!-- -->
@@ -249,6 +243,5 @@
     </div>
   </p>
 </footer>
-
 
 </body>

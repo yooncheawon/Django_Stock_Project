@@ -14,20 +14,11 @@ import requests
 import json
 from django.conf import settings
 import urllib.request as req
-
 from bs4 import BeautifulSoup
-
 from datetime import datetime, timedelta
 import datetime
 from dateutil.relativedelta import relativedelta
 from django.utils.dateformat import DateFormat
-
-
-
-
-
-    
-
 
 
 
@@ -48,7 +39,7 @@ def home(request):
     my_news_writing = soup.select('#main_content > div > div._persist > div.section_headline > ul > li > div.sh_text > div.sh_text_info > div')
     my_news_image = soup.select('#main_content > div > div._persist > div.section_headline > ul > li > div.sh_thumb > div > a > img')
 
-    #newslist = []
+
     newslist = list()
     nnews = list()
     nlink = list()
@@ -66,7 +57,7 @@ def home(request):
         content = my_news_content[i].text.strip()
         writing = my_news_writing[i].text.strip()
 
-        try: #list index out of range 방지를 위한 예외처리
+        try: #이거 빠지면 오류남
             image_s = my_news_image[i].get('src')
             image = my_news_image[i].get('src').replace('nf132_90','w647')
         except:
@@ -84,13 +75,12 @@ def home(request):
 
         newslist.append(item_obj)
    
-
     data = newslist
 
 
 
 
-    # 네이버 뉴스 글로벌 경제_금융
+    # 글로벌 뉴스
     res = requests.get(finance_news_url, headers=headers)
     soup2 = BeautifulSoup(res.text, 'html.parser')
 
@@ -127,7 +117,7 @@ def home(request):
 
 
 
-    ####top종목
+    #top종목
     urls = 'https://finance.naver.com/'
     headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36"}
     res = requests.get(urls,headers=headers)
